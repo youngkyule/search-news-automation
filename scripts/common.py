@@ -132,7 +132,7 @@ def pick_reporter(site):
 
 def build_byline_html(reporter, site):
     """신문 기사처럼 [매체명] 기자명 기자 | 이메일 형태의 바이라인을 만든다."""
-    site_name = site.get("site_name", "검색뉴스")
+    site_name = site.get("site_name", "라하뉴스")
     name = reporter.get("name", "편집팀")
     email = reporter.get("email", "")
     email_part = f' | <a href="mailto:{email}">{email}</a>' if email else ""

@@ -1,4 +1,4 @@
-"""Google Gemini API(무료 티어)로 '검색뉴스' 스타일의 문제해결형 기사를 생성한다."""
+"""Google Gemini API(무료 티어)로 '라하뉴스' 스타일의 문제해결형 기사를 생성한다."""
 import json
 import os
 import re
@@ -7,7 +7,7 @@ import requests
 
 GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 
-SYSTEM_PROMPT = """당신은 한국 생활정보 매체 '검색뉴스'의 기자입니다.
+SYSTEM_PROMPT = """당신은 한국 생활정보 매체 '라하뉴스'의 기자입니다.
 독자가 구글/네이버에 실제로 검색할 법한 생활 속 문제를 다루고, 신뢰할 수 있고
 실질적으로 도움이 되는 해결 방법을 신문 기사 톤으로 작성합니다.
 
@@ -41,7 +41,7 @@ html 본문 작성 규칙:
 USER_PROMPT_TEMPLATE = """카테고리: {category}
 주제(검색 키워드): {topic}
 
-위 주제로 '검색뉴스'에 게재할 기사를 JSON 스키마에 맞춰 작성해 주세요."""
+위 주제로 '라하뉴스'에 게재할 기사를 JSON 스키마에 맞춰 작성해 주세요."""
 
 
 def _extract_json(text):
