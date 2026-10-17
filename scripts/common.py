@@ -1,6 +1,7 @@
 """공용 유틸리티: 설정 파일 로딩, 사용한 주제 상태 관리."""
 import json
 import os
+import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_CONFIG_PATH = os.path.join(ROOT, "config", "site.json")
@@ -72,3 +73,66 @@ def pick_next_topics(count):
                     used.add(key)
 
     return picked, used
+
+
+def _image_tag(data_uri, alt):
+    safe_alt = alt.replace('"', "'")
+    return (
+        f'<img src="{data_uri}" alt="{safe_alt}" '
+        'style="max-width:100%;height:auto;border-radius:8px;margin:16px 0;" loading="lazy"/>'
+    )
+
+
+def insert_images_into_html(html, images):
+    """images: [(data_uri, alt_text), ...]. <h2> 소제목 앞마다 이미지를 하나씩 배치하고,
+    남는 이미지는 첫 문단 뒤에 추가한다. 이미지가 없으면 원본 html을 그대로 반환한다."""
+    if not images:
+        return html
+
+    remaining = list(images)
+
+    def repl(_match):
+        if remaining:
+            data_uri, alt = remaining.pop(0)
+            return _image_tag(data_uri, alt) + "\n<h2>"
+        return "<h2>"
+
+    html = re.sub(r"<h2>", repl, html)
+
+    if remaining:
+        leftover_html = "".join(_image_tag(uri, alt) for uri, alt in remaining)
+        new_html, count = re.subn(r"</p>", "</p>\n" + leftover_html, html, count=1)
+        html = new_html if count else html + leftover_html
+
+    return html
+
+
+BYLINE_MARKER = 'class="kn-byline"'
+
+
+def assign_reporter(category, site):
+    reporters = site.get("reporters", {})
+    return reporters.get(category, "편집팀")
+
+
+def build_byline_html(category, site):
+    """신문 기사처럼 [매체명] 기자명 기자 | 이메일 형태의 바이라인을 만든다."""
+    reporter = assign_reporter(category, site)
+    email = site.get("press_email", "")
+    site_name = site.get("site_name", "검색뉴스")
+    email_part = f' | <a href="mailto:{email}">{email}</a>' if email else ""
+    return (
+        f'<p {BYLINE_MARKER} style="color:#666;font-size:14px;margin:0 0 20px 0;">'
+        f"[{site_name}] {reporter} 기자{email_part}</p>"
+    )
+
+
+def has_byline(html):
+    return BYLINE_MARKER in html
+
+
+def add_byline(html, category, site):
+    """이미 바이라인이 있으면 그대로 두고, 없으면 맨 앞에 추가한다."""
+    if has_byline(html):
+        return html
+    return build_byline_html(category, site) + "\n" + html

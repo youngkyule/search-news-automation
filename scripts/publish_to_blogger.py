@@ -6,8 +6,9 @@ import time
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
-from common import load_site_config, pick_next_topics, save_used_topics
+from common import add_byline, insert_images_into_html, load_site_config, pick_next_topics, save_used_topics
 from generate_article import generate_article
+from generate_images import generate_images_for_article
 
 DRY_RUN = os.environ.get("DRY_RUN", "false").lower() == "true"
 
@@ -39,7 +40,7 @@ def publish_post(service, blog_id, article):
 
 def main():
     site = load_site_config()
-    count = int(os.environ.get("POSTS_PER_DAY", site.get("posts_per_day", 1)))
+    count = int(os.environ.get("POSTS_PER_DAY", site.get("posts_per_day", 2)))
 
     picked, updated_used = pick_next_topics(count)
     if not picked:
@@ -54,6 +55,15 @@ def main():
         category, topic = item["category"], item["topic"]
         print(f"[생성 중] ({category}) {topic}")
         article = generate_article(category, topic, model=site.get("model", "gemini-flash-lite-latest"))
+
+        images_per_post = int(site.get("images_per_post", 4))
+        if images_per_post > 0:
+            print(f"  [이미지 생성 중] {images_per_post}장")
+            images = generate_images_for_article(category, topic, count=images_per_post)
+            print(f"  -> {len(images)}장 생성 완료")
+            article["html"] = insert_images_into_html(article["html"], images)
+
+        article["html"] = add_byline(article["html"], category, site)
 
         if DRY_RUN:
             print(f"  -> (DRY RUN) 제목: {article['title']}")

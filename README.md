@@ -2,14 +2,19 @@
 
 한국인이 구글/네이버에서 많이 검색하는 '생활 속 문제'를 주제로,
 **Google Gemini API 무료 티어**가 기사를 생성하고 Blogger API로 자동 발행하는
-파이프라인입니다. 비용이 전혀 들지 않으며, GitHub Actions가 매일 1개씩 글을 올립니다.
+파이프라인입니다. 비용이 전혀 들지 않으며, GitHub Actions가 매일 2개씩 글을 올립니다.
+각 기사는 카테고리별로 고정 배정된 담당 기자 바이라인(이름 + 이메일)이 붙고,
+**Pollinations.ai**(무료, 가입/카드 불필요)로 생성한 이미지가 3~5장씩 본문에 들어갑니다.
 
 ## 구성
-- `config/site.json` — 사이트 기본 정보, 카테고리, 소개/개인정보처리방침/문의 페이지 내용
+- `config/site.json` — 사이트 기본 정보, 카테고리, 담당 기자 배정, 소개/개인정보처리방침/문의 페이지 내용
 - `config/topics.json` — 카테고리별 주제(검색 키워드) 뱅크
 - `data/used_topics.json` — 이미 사용한 주제 기록 (자동 갱신됨)
 - `scripts/generate_article.py` — Gemini API(무료)로 기사 1건 생성
-- `scripts/publish_to_blogger.py` — 매일 실행되는 메인 스크립트 (주제 선택 → 생성 → 발행)
+- `scripts/generate_images.py` — Pollinations.ai(무료)로 기사당 이미지 생성
+- `scripts/publish_to_blogger.py` — 매일 실행되는 메인 스크립트 (주제 선택 → 기사/이미지 생성 → 바이라인 추가 → 발행)
+- `scripts/backfill_images.py` — 1회성: 기존에 올라간 글에 이미지 소급 추가
+- `scripts/backfill_byline.py` — 1회성: 기존에 올라간 글에 기자 바이라인 소급 추가
 - `scripts/get_refresh_token.py` — 최초 1회, 로컬에서 Google OAuth 인증
 - `scripts/create_static_pages.py` — 최초 1회, 필수 페이지(소개/개인정보처리방침/문의) 생성
 - `.github/workflows/daily-publish.yml` — 매일 자동 실행 워크플로
