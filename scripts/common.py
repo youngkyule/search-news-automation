@@ -1,6 +1,7 @@
 """공용 유틸리티: 설정 파일 로딩, 사용한 주제 상태 관리."""
 import json
 import os
+import random
 import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -118,22 +119,26 @@ def insert_images_into_html(html, images):
 
 
 BYLINE_MARKER = 'class="kn-byline"'
+BYLINE_BLOCK_RE = re.compile(r'<p[^>]*class="kn-byline"[^>]*>.*?</p>\s*', re.DOTALL)
 
 
-def assign_reporter(category, site):
-    reporters = site.get("reporters", {})
-    return reporters.get(category, "편집팀")
+def pick_reporter(site):
+    """기사마다 담당 기자를 무작위로 배정한다(카테고리 고정 아님)."""
+    reporters = site.get("reporters", [])
+    if not reporters:
+        return {"name": "편집팀", "email": ""}
+    return random.choice(reporters)
 
 
-def build_byline_html(category, site):
+def build_byline_html(reporter, site):
     """신문 기사처럼 [매체명] 기자명 기자 | 이메일 형태의 바이라인을 만든다."""
-    reporter = assign_reporter(category, site)
-    email = site.get("press_email", "")
     site_name = site.get("site_name", "검색뉴스")
+    name = reporter.get("name", "편집팀")
+    email = reporter.get("email", "")
     email_part = f' | <a href="mailto:{email}">{email}</a>' if email else ""
     return (
         f'<p {BYLINE_MARKER} style="color:#666;font-size:14px;margin:0 0 20px 0;">'
-        f"[{site_name}] {reporter} 기자{email_part}</p>"
+        f"[{site_name}] {name} 기자{email_part}</p>"
     )
 
 
@@ -141,8 +146,18 @@ def has_byline(html):
     return BYLINE_MARKER in html
 
 
-def add_byline(html, category, site):
-    """이미 바이라인이 있으면 그대로 두고, 없으면 맨 앞에 추가한다."""
+def strip_byline(html):
+    return BYLINE_BLOCK_RE.sub("", html, count=1)
+
+
+def add_byline(html, reporter, site):
+    """이미 바이라인이 있으면 그대로 두고, 없으면 맨 앞에 추가한다(새 글 발행용)."""
     if has_byline(html):
         return html
-    return build_byline_html(category, site) + "\n" + html
+    return build_byline_html(reporter, site) + "\n" + html
+
+
+def set_byline(html, reporter, site):
+    """기존 바이라인이 있으면 제거하고 새 기자 정보로 교체한다(기존 글 수정용)."""
+    html = strip_byline(html)
+    return build_byline_html(reporter, site) + "\n" + html

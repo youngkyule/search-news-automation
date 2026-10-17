@@ -6,7 +6,7 @@ import time
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
-from common import add_byline, insert_images_into_html, load_site_config, pick_next_topics, save_used_topics
+from common import add_byline, insert_images_into_html, load_site_config, pick_next_topics, pick_reporter, save_used_topics
 from generate_article import generate_article
 from generate_images import generate_images_for_article
 
@@ -63,7 +63,9 @@ def main():
             print(f"  -> {len(images)}장 생성 완료")
             article["html"] = insert_images_into_html(article["html"], images)
 
-        article["html"] = add_byline(article["html"], category, site)
+        reporter = pick_reporter(site)
+        article["html"] = add_byline(article["html"], reporter, site)
+        print(f"  [담당 기자] {reporter['name']} 기자 ({reporter['email']})")
 
         if DRY_RUN:
             print(f"  -> (DRY RUN) 제목: {article['title']}")
