@@ -6,7 +6,15 @@ import time
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
-from common import add_byline, insert_images_into_html, load_site_config, pick_next_topics, pick_reporter, save_used_topics
+from common import (
+    add_byline,
+    insert_images_into_html,
+    load_site_config,
+    pick_next_topics,
+    pick_reporter,
+    save_category_cursor,
+    save_used_topics,
+)
 from generate_article import generate_article
 from generate_images import generate_images_for_article
 
@@ -42,7 +50,7 @@ def main():
     site = load_site_config()
     count = int(os.environ.get("POSTS_PER_DAY", site.get("posts_per_day", 2)))
 
-    picked, updated_used = pick_next_topics(count)
+    picked, updated_used, next_cursor = pick_next_topics(count)
     if not picked:
         print("발행할 주제가 없습니다. config/topics.json을 확인하세요.")
         sys.exit(1)
@@ -78,6 +86,7 @@ def main():
 
     if not DRY_RUN:
         save_used_topics(sorted(updated_used))
+        save_category_cursor(next_cursor)
 
     print(f"\n총 {len(results)}개 기사 처리 완료.")
     for r in results:

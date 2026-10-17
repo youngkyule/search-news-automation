@@ -8,6 +8,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_CONFIG_PATH = os.path.join(ROOT, "config", "site.json")
 TOPICS_PATH = os.path.join(ROOT, "config", "topics.json")
 USED_TOPICS_PATH = os.path.join(ROOT, "data", "used_topics.json")
+CATEGORY_CURSOR_PATH = os.path.join(ROOT, "data", "category_cursor.json")
 
 
 def load_site_config():
@@ -33,47 +34,52 @@ def save_used_topics(used):
         json.dump(used, f, ensure_ascii=False, indent=2)
 
 
+def load_category_cursor():
+    """다음 실행에서 어느 카테고리부터 이어갈지 기억하는 커서(인덱스)를 읽는다."""
+    if not os.path.exists(CATEGORY_CURSOR_PATH):
+        return 0
+    with open(CATEGORY_CURSOR_PATH, "r", encoding="utf-8") as f:
+        return json.load(f).get("next_index", 0)
+
+
+def save_category_cursor(next_index):
+    os.makedirs(os.path.dirname(CATEGORY_CURSOR_PATH), exist_ok=True)
+    with open(CATEGORY_CURSOR_PATH, "w", encoding="utf-8") as f:
+        json.dump({"next_index": next_index}, f, ensure_ascii=False, indent=2)
+
+
 def pick_next_topics(count):
-    """카테고리를 순환하며 아직 쓰지 않은 주제를 count개 고른다.
-    모든 주제를 다 썼다면 사용 기록을 초기화하고 처음부터 다시 돈다.
+    """카테고리를 순서대로 하나씩 순환하며 주제를 count개 고른다.
+
+    실행할 때마다 카테고리 인덱스를 0부터 다시 시작하지 않고, 지난 실행이
+    멈춘 지점(category_cursor.json)부터 이어간다. 예: 카테고리가 8개이고
+    하루 2개씩 발행하면 1일차 생활정보+IT/디지털, 2일차 건강+금융/정부지원,
+    3일차 법률/행정+자동차, 4일차 쇼핑/생활꿀팁+교육/취업, 5일차부터 다시 처음.
+
+    한 카테고리의 주제를 모두 썼다면 그 카테고리의 사용 기록만 초기화해서
+    다시 돈다(다른 카테고리의 사용 기록은 유지).
     """
     topics_by_category = load_topics()
     used = set(load_used_topics())
     categories = list(topics_by_category.keys())
+    cursor = load_category_cursor() % len(categories)
 
     picked = []
-    cat_index = 0
-    attempts = 0
-    max_attempts = sum(len(v) for v in topics_by_category.values()) * 2 + len(categories) + 10
-
-    while len(picked) < count and attempts < max_attempts:
-        category = categories[cat_index % len(categories)]
-        cat_index += 1
-        attempts += 1
+    for i in range(count):
+        category = categories[(cursor + i) % len(categories)]
 
         candidates = [t for t in topics_by_category[category] if f"{category}::{t}" not in used]
         if not candidates:
-            continue
+            # 이 카테고리의 주제를 모두 사용함: 이 카테고리만 사용 기록 초기화
+            used = {u for u in used if not u.startswith(f"{category}::")}
+            candidates = topics_by_category[category]
 
         topic = candidates[0]
         picked.append({"category": category, "topic": topic})
         used.add(f"{category}::{topic}")
 
-    if len(picked) < count:
-        # 모든 주제를 소진한 경우: 사용 기록을 리셋하고 부족한 만큼 다시 채운다
-        used = set()
-        for category in categories:
-            if len(picked) >= count:
-                break
-            for topic in topics_by_category[category]:
-                if len(picked) >= count:
-                    break
-                key = f"{category}::{topic}"
-                if key not in used:
-                    picked.append({"category": category, "topic": topic})
-                    used.add(key)
-
-    return picked, used
+    next_cursor = (cursor + count) % len(categories)
+    return picked, used, next_cursor
 
 
 def resolve_category(labels, site):

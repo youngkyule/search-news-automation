@@ -39,6 +39,6 @@ jobs:
         run: |
           git config user.name "search-news-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/used_topics.json
+          git add data/used_topics.json data/category_cursor.json
           git diff --cached --quiet || git commit -m "chore: 사용한 주제 기록 업데이트 [skip ci]"
           git push
