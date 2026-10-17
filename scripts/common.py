@@ -75,6 +75,16 @@ def pick_next_topics(count):
     return picked, used
 
 
+def resolve_category(labels, site):
+    """Blogger API는 라벨 순서를 알파벳순 등으로 재배열해서 돌려주므로,
+    labels[0]이 아니라 known 카테고리 중 하나가 포함돼 있는지로 찾는다."""
+    known = site.get("categories", [])
+    for label in labels or []:
+        if label in known:
+            return label
+    return known[0] if known else "생활정보"
+
+
 def _image_tag(data_uri, alt):
     safe_alt = alt.replace('"', "'")
     return (

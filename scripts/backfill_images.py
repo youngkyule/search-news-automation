@@ -6,7 +6,7 @@ import time
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
-from common import insert_images_into_html, load_site_config
+from common import insert_images_into_html, load_site_config, resolve_category
 from generate_images import generate_images_for_article
 
 
@@ -37,7 +37,7 @@ def main():
         title = post["title"]
         content = post["content"]
         labels = post.get("labels", [])
-        category = labels[0] if labels else "생활정보"
+        category = resolve_category(labels, site)
 
         if "data:image" in content:
             print(f"[건너뜀] 이미 이미지가 있음: {title}")

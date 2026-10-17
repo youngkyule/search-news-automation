@@ -6,7 +6,7 @@ import time
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
-from common import add_byline, has_byline, load_site_config
+from common import add_byline, has_byline, load_site_config, resolve_category
 
 
 def get_blogger_service():
@@ -35,7 +35,7 @@ def main():
         title = post["title"]
         content = post["content"]
         labels = post.get("labels", [])
-        category = labels[0] if labels else "생활정보"
+        category = resolve_category(labels, site)
 
         if has_byline(content):
             print(f"[건너뜀] 이미 바이라인이 있음: {title}", flush=True)
