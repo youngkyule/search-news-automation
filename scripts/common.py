@@ -86,16 +86,19 @@ def resolve_category(labels, site):
     return known[0] if known else "생활정보"
 
 
-def _image_tag(data_uri, alt):
+def _image_tag(image_url, alt):
+    """image_url: 외부 이미지 URL(예: Pollinations.ai). base64로 본문에 직접 삽입하면
+    글 용량이 커져 Blogger의 다중 게시물 페이지(홈/검색)에서 응답 크기 제한에 걸려
+    글이 잘려나가는 문제가 있어(2026-10-17 확인), 반드시 외부 URL 참조 방식을 사용한다."""
     safe_alt = alt.replace('"', "'")
     return (
-        f'<img src="{data_uri}" alt="{safe_alt}" '
+        f'<img src="{image_url}" alt="{safe_alt}" '
         'style="max-width:100%;height:auto;border-radius:8px;margin:16px 0;" loading="lazy"/>'
     )
 
 
 def insert_images_into_html(html, images):
-    """images: [(data_uri, alt_text), ...]. <h2> 소제목 앞마다 이미지를 하나씩 배치하고,
+    """images: [(image_url, alt_text), ...]. <h2> 소제목 앞마다 이미지를 하나씩 배치하고,
     남는 이미지는 첫 문단 뒤에 추가한다. 이미지가 없으면 원본 html을 그대로 반환한다."""
     if not images:
         return html
@@ -104,14 +107,14 @@ def insert_images_into_html(html, images):
 
     def repl(_match):
         if remaining:
-            data_uri, alt = remaining.pop(0)
-            return _image_tag(data_uri, alt) + "\n<h2>"
+            image_url, alt = remaining.pop(0)
+            return _image_tag(image_url, alt) + "\n<h2>"
         return "<h2>"
 
     html = re.sub(r"<h2>", repl, html)
 
     if remaining:
-        leftover_html = "".join(_image_tag(uri, alt) for uri, alt in remaining)
+        leftover_html = "".join(_image_tag(url, alt) for url, alt in remaining)
         new_html, count = re.subn(r"</p>", "</p>\n" + leftover_html, html, count=1)
         html = new_html if count else html + leftover_html
 

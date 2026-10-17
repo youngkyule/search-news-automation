@@ -1,0 +1,4 @@
+NOTE: partial backup (first ~60KB of 136KB) captured 2026-10-17 before ardentnews-style redesign.
+This covers Contempo's stock skin CSS (recoverable by re-selecting "Contempo" theme if ever needed).
+The truly unique parts of this blog (Page List nav items, widget visibility, AdSense slots) live in
+Blogger's widget settings, not here, and are not affected by template XML edits made via the HTML editor.

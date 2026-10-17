@@ -1,12 +1,14 @@
-"""Pollinations.ai(완전 무료, API 키 불필요)로 기사용 이미지를 생성한다."""
-import base64
-import io
+"""Pollinations.ai(완전 무료, API 키 불필요)로 기사용 이미지를 생성한다.
+
+이미지는 base64로 본문에 직접 삽입하지 않고, Pollinations의 외부 URL을 그대로
+<img src=""/>로 참조한다. base64 삽입은 글 하나당 본문 용량이 180~200KB까지 커져
+Blogger가 홈/검색 등 여러 글을 한 번에 보여주는 페이지에서 응답 크기 제한에 걸려
+글이 1~2개만 보이고 잘려나가는 문제를 일으켰다(2026-10-17 확인)."""
 import random
 import time
 import urllib.parse
 
 import requests
-from PIL import Image
 
 POLLINATIONS_BASE = "https://image.pollinations.ai/prompt/"
 
@@ -74,33 +76,27 @@ CATEGORY_PROMPTS = {
 DEFAULT_PROMPTS = CATEGORY_PROMPTS["생활정보"]
 
 
-def _fetch_one(prompt, seed, retries=5):
+def _build_url(prompt, seed):
     url = POLLINATIONS_BASE + urllib.parse.quote(prompt)
-    params = {"nologo": "true", "seed": seed}
+    return url + f"?nologo=true&seed={seed}&width=800"
+
+
+def _verify_one(url, retries=5):
+    """URL이 실제로 이미지를 서빙하는지 한 번 확인한다(생성은 이미 이 요청에서 캐시됨)."""
     for attempt in range(retries):
         try:
-            resp = requests.get(url, params=params, timeout=120)
+            resp = requests.get(url, timeout=120)
             if resp.status_code == 200 and resp.headers.get("Content-Type", "").startswith("image"):
-                return resp.content
+                return True
             print(f"    (시도 {attempt + 1}/{retries}) 상태 코드 {resp.status_code}, 재시도...")
         except requests.RequestException as exc:
             print(f"    (시도 {attempt + 1}/{retries}) 네트워크 오류: {exc}, 재시도...")
         time.sleep(8 * (attempt + 1))
-    return None
-
-
-def _compress(image_bytes, max_width=800, quality=78):
-    img = Image.open(io.BytesIO(image_bytes)).convert("RGB")
-    if img.width > max_width:
-        ratio = max_width / img.width
-        img = img.resize((max_width, int(img.height * ratio)))
-    buf = io.BytesIO()
-    img.save(buf, format="JPEG", quality=quality, optimize=True)
-    return buf.getvalue()
+    return False
 
 
 def generate_images_for_article(category, topic, count=4):
-    """(data_uri, alt_text) 튜플 리스트를 반환한다. 생성 실패한 이미지는 건너뛴다."""
+    """(image_url, alt_text) 튜플 리스트를 반환한다. 생성 실패한 이미지는 건너뛴다."""
     prompts = CATEGORY_PROMPTS.get(category, DEFAULT_PROMPTS)
     chosen = random.sample(prompts, k=min(count, len(prompts)))
     while len(chosen) < count:
@@ -109,18 +105,12 @@ def generate_images_for_article(category, topic, count=4):
     results = []
     for i, prompt in enumerate(chosen):
         seed = random.randint(1, 1_000_000)
-        raw = _fetch_one(prompt, seed)
-        if raw is None:
+        url = _build_url(prompt, seed)
+        if not _verify_one(url):
             print(f"  [이미지 {i+1}] 생성 실패, 건너뜀")
             continue
-        try:
-            compressed = _compress(raw)
-        except Exception as exc:
-            print(f"  [이미지 {i+1}] 압축 실패({exc}), 건너뜀")
-            continue
-        data_uri = "data:image/jpeg;base64," + base64.b64encode(compressed).decode("ascii")
         alt = f"{topic} 관련 이미지 {i + 1}"
-        results.append((data_uri, alt))
+        results.append((url, alt))
         time.sleep(1)  # 무료 서비스에 대한 매너 딜레이
     return results
 
@@ -128,5 +118,5 @@ def generate_images_for_article(category, topic, count=4):
 if __name__ == "__main__":
     imgs = generate_images_for_article("생활정보", "변기 막힘 뚫는 법", count=2)
     print(f"생성된 이미지 수: {len(imgs)}")
-    for uri, alt in imgs:
-        print(alt, "| base64 길이:", len(uri))
+    for url, alt in imgs:
+        print(alt, "|", url)
