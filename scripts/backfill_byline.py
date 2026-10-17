@@ -38,13 +38,16 @@ def main():
     for i, post in enumerate(items):
         post_id = post["id"]
         title = post["title"]
+        labels = post.get("labels", [])
         content = post["content"]
 
         reporter = shuffled[i % len(shuffled)] if shuffled else pick_reporter(site)
         new_content = set_byline(content, reporter, site)
 
         service.posts().update(
-            blogId=blog_id, postId=post_id, body={"content": new_content}
+            blogId=blog_id,
+            postId=post_id,
+            body={"title": title, "labels": labels, "content": new_content},
         ).execute()
         print(f"[완료] {title} -> {reporter['name']} 기자 ({reporter['email']})", flush=True)
         time.sleep(2)

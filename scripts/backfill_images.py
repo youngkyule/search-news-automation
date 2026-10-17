@@ -52,7 +52,9 @@ def main():
 
         new_content = insert_images_into_html(content, images)
         service.posts().update(
-            blogId=blog_id, postId=post_id, body={"content": new_content}
+            blogId=blog_id,
+            postId=post_id,
+            body={"title": title, "labels": labels, "content": new_content},
         ).execute()
         print("  -> 업데이트 완료")
         time.sleep(3)
