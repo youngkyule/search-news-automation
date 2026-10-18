@@ -162,8 +162,17 @@ Claude의 브라우저 자동화 환경에서는 `naver.com` 계열 도메인이
 2. "웹마스터 도구" → "사이트 등록" → 블로그 주소 입력
 3. 소유 확인 방법으로 **"HTML 태그"** 선택 → 발급된
    `<meta name="naver-site-verification" content="...">` 코드를 Claude에게 전달하면
-   테마의 `<head>`에 삽입 작업을 이어서 진행 가능
-4. 등록 후 "요청 → 사이트맵 제출"에서 `sitemap.xml` 제출
+   테마의 `<head>`에 삽입 작업을 이어서 진행 가능(viewport 메타 태그 바로 뒤에 삽입)
+4. 소유 확인 완료 후 "요청 → 사이트맵 제출"에서 `sitemap.xml` 제출
+5. "요청 → RSS 제출"에서 RSS 주소 제출 시 **반드시 `?alt=rss`를 붙일 것**:
+   - ❌ `https://<주소>.blogspot.com/feeds/posts/default` (Atom 형식 — 네이버가 거부함)
+   - ✅ `https://<주소>.blogspot.com/feeds/posts/default?alt=rss` (RSS 2.0 형식 — 정상 등록됨)
+   - Blogger의 기본 피드는 Atom(`<feed>` 루트)이라 `alt=rss` 파라미터로 RSS 2.0(`<rss>` 루트)
+     버전을 받아야 네이버의 RSS 제출 검증을 통과함. (2026-10-18 실제로 Atom 주소가
+     거부되는 것을 확인하고 이 방법으로 해결함)
+
+**2026-10-18 기준 완료 상태**: Google Search Console(속성 등록·사이트맵·색인 요청)과
+네이버 서치어드바이저(사이트 소유 확인·사이트맵 제출·RSS 제출) 모두 완료됨.
 
 ### 11-4. 블로그 주소를 나중에 또 바꾸는 경우 체크리스트
 - Blogger 설정 → 게시 → 블로그 주소 변경 (BLOGGER_BLOG_ID는 변하지 않음 → 자동화 스크립트 수정 불필요)
