@@ -15,9 +15,9 @@
 1. 브라우저에서 https://blogger.com 접속 → 본인 구글 계정으로 로그인
 2. "새 블로그 만들기" 클릭
 3. 제목: `라하뉴스`
-4. 블로그 주소: 원하는 주소 입력 (예: `searchnews-kr.blogspot.com`, 이미 쓰이고 있으면 다른 주소 시도)
+4. 블로그 주소: 원하는 주소 입력 (예: `rahanews-kr.blogspot.com`, 이미 쓰이고 있으면 다른 주소 시도)
 5. 테마는 아무거나 선택(나중에 `theme/신문사_테마_가이드.md`로 바꿉니다)
-6. 생성 완료 후, 주소창의 블로그 URL을 기억해 두세요. (예: `https://searchnews-kr.blogspot.com`)
+6. 생성 완료 후, 주소창의 블로그 URL을 기억해 두세요. (예: `https://rahanews-kr.blogspot.com`, 현재 실제 주소)
 
 ## STEP 2. Google Cloud에서 Blogger API 사용 설정
 
@@ -133,3 +133,40 @@ python scripts/create_static_pages.py
 - 발행 시간을 바꾸고 싶다면 `.github/workflows/daily-publish.yml`의 `cron` 값을 수정하세요
   (cron은 UTC 기준이며, KST는 UTC+9시입니다).
 - 주제가 바닥나면 `config/topics.json`에 새 항목을 추가해 주세요.
+
+## STEP 11. 구글·네이버 검색 노출 설정 (2026-10-18 진행)
+
+### 11-1. Blogger 자체 설정
+- 설정 → 개인정보 보호 → **"검색엔진에 표시됨"** ON (검색엔진이 블로그를 찾을 수 있게 허용)
+- 설정 → 메타 태그 → **"검색 설명 사용 설정"** ON + 홈페이지용 검색 설명(요약 문구) 입력
+  - ⚠️ 이 입력란은 **쉼표(,)가 들어가면 저장 오류**가 남. 쉼표 없는 문장으로 작성할 것.
+- 설정 → 크롤러 및 색인 생성 → **"맞춤 robots.txt"/"맞춤 로봇 헤더 태그"는 OFF 유지**
+  (Blogger 기본값이 이미 크롤링을 허용하므로 건드릴 필요 없음)
+- 각 글의 검색 설명(`searchDescription`)도 `scripts/publish_to_blogger.py`가
+  `generate_article()`이 만든 `meta_description`을 Blogger API로 자동 전송하도록
+  반영되어 있음(2026-10-18부터 신규 발행 글에 자동 적용). 기존 글은
+  `scripts/backfill_search_description.py`로 일괄 채워 넣음.
+
+### 11-2. Google Search Console
+1. Blogger 설정 → 크롤러 및 색인 생성 → **"Google Search Console"** 링크 클릭
+   (블로그와 같은 구글 계정이면 소유권이 자동으로 확인됨)
+2. "URL 접두어" 방식으로 `https://<내-블로그-주소>.blogspot.com/` 등록
+3. 좌측 메뉴 **Sitemaps** → `sitemap.xml` 입력 후 제출
+   (Blogger가 `/sitemap.xml`을 자동 생성해 줌 — 별도로 만들 필요 없음)
+4. **URL 검사**에서 홈페이지 주소를 검사 → "색인 생성 요청" 클릭(선택 사항이지만 초기 노출에 도움)
+
+### 11-3. 네이버 서치어드바이저 (Claude가 자동 진행 불가 — 직접 진행 필요)
+Claude의 브라우저 자동화 환경에서는 `naver.com` 계열 도메인이 안전 정책상
+차단되어 있어 직접 접속이 불가능함. 아래 과정은 사용자가 직접 진행:
+1. https://searchadvisor.naver.com 접속 → 네이버 계정 로그인
+2. "웹마스터 도구" → "사이트 등록" → 블로그 주소 입력
+3. 소유 확인 방법으로 **"HTML 태그"** 선택 → 발급된
+   `<meta name="naver-site-verification" content="...">` 코드를 Claude에게 전달하면
+   테마의 `<head>`에 삽입 작업을 이어서 진행 가능
+4. 등록 후 "요청 → 사이트맵 제출"에서 `sitemap.xml` 제출
+
+### 11-4. 블로그 주소를 나중에 또 바꾸는 경우 체크리스트
+- Blogger 설정 → 게시 → 블로그 주소 변경 (BLOGGER_BLOG_ID는 변하지 않음 → 자동화 스크립트 수정 불필요)
+- ⚠️ 이전 주소 → 새 주소로 **자동 리디렉션되지 않음**
+- Google Search Console에 새 주소로 속성을 다시 등록하고 사이트맵도 재제출해야 함
+- 네이버 서치어드바이저도 새 주소로 재등록 필요

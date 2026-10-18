@@ -39,6 +39,9 @@ def publish_post(service, blog_id, article):
         "content": article["html"],
         "labels": article["labels"],
     }
+    meta_description = article.get("meta_description")
+    if meta_description:
+        body["searchDescription"] = meta_description[:150]
     return (
         service.posts()
         .insert(blogId=blog_id, body=body, isDraft=False)
