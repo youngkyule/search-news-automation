@@ -30,13 +30,38 @@
    - 앱 이름: `라하뉴스 자동화`, 사용자 지원 이메일: 본인 이메일
    - 범위(Scopes) 단계는 기본값으로 넘어가도 됩니다
    - "테스트 사용자" 단계에서 본인 구글 이메일 주소를 추가
-   - 저장 후 완료 (게시 상태는 "테스트" 그대로 두어도 자동화에는 문제 없습니다)
+   - 저장 후 완료
+   - ⚠️ **게시 상태를 반드시 "프로덕션(게시)"으로 전환할 것.** "테스트 중" 상태로
+     두면 발급되는 refresh token이 **7일 후 자동 만료**되어 7일 뒤 자동 발행이
+     `invalid_grant: Token has been expired or revoked` 오류로 실패함
+     (2026-10-20 실제 발생 — 최초 설정 후 7일 뒤 스케줄 실행이 깨짐). 아래
+     STEP 2-1을 이어서 진행해 "대상" 페이지에서 "앱 게시"까지 완료할 것.
 6. 좌측 메뉴 → "API 및 서비스" → "사용자 인증 정보"
    - "+ 사용자 인증 정보 만들기" → "OAuth 클라이언트 ID"
    - 애플리케이션 유형: **데스크톱 앱**
    - 이름: `search-news-desktop`
    - 만들기 후 뜨는 창에서 **JSON 다운로드** → 파일명을 `client_secret.json`으로 저장
    - 이 파일은 이 프로젝트 폴더 바로 아래 두되, 절대 GitHub에 올리지 마세요 (`.gitignore`에 이미 등록되어 있습니다)
+
+## STEP 2-1. OAuth 동의 화면을 "프로덕션"으로 게시 (필수)
+
+refresh token이 7일마다 만료되는 것을 막으려면 앱을 테스트 모드에서 꺼내야 합니다.
+
+1. Google Cloud Console → "Google 인증 플랫폼" → **"브랜딩"** 페이지로 이동
+   - "애플리케이션 홈페이지"에 블로그 주소 입력 (예: `https://rahanews-kr.blogspot.com/`)
+   - "애플리케이션 개인정보처리방침 링크"에 개인정보처리방침 페이지 주소 입력
+     (STEP 7에서 자동 생성된 페이지, 예: `https://rahanews-kr.blogspot.com/p/blog-page_12.html`)
+   - "승인된 도메인"에 블로그 도메인 추가 (예: `rahanews-kr.blogspot.com`)
+   - 저장
+2. "대상" 페이지로 이동 → **"앱 게시"** 클릭 → "프로덕션으로 푸시하시겠어요?" 확인창에서
+   **확인** 클릭
+   - Blogger API 범위는 민감/제한 범위가 아니고 승인된 도메인도 1개뿐이라 Google의
+     별도 인증 심사 없이 즉시 "프로덕션 단계"로 전환됨
+   - 게시 상태가 "프로덕션 단계"로 바뀌면 이후 발급되는 refresh token은 만료되지 않음
+3. 이미 "테스트 중" 상태에서 발급받은 refresh token을 쓰고 있었다면, 프로덕션 전환 후
+   **STEP 3을 다시 실행해 refresh token을 새로 발급받고 GitHub Secret을 갱신**해야
+   함(기존 테스트 모드 토큰은 전환 시점에 이미 살아있어도 되고 만료되어 있어도 됨 —
+   새로 받는 게 가장 확실함).
 
 ## STEP 3. 내 PC에서 1회 로그인하여 refresh token 받기
 
@@ -54,6 +79,16 @@ python scripts/get_refresh_token.py client_secret.json
    - `GOOGLE_CLIENT_ID`
    - `GOOGLE_CLIENT_SECRET`
    - `GOOGLE_REFRESH_TOKEN`
+
+⚠️ **이 PC(anaconda 환경)에서 `ImportError: DLL load failed while importing _ssl`
+또는 `OpenSSL.crypto` 관련 `AttributeError`가 날 경우** (2026-10-20 실제 발생):
+anaconda의 `_ssl`이 PATH상의 다른 OpenSSL DLL과 충돌하는 문제. 아래처럼 anaconda
+자체 DLL 경로를 PATH 맨 앞에 넣고 같은 터미널에서 실행하면 해결됨:
+
+```powershell
+$env:PATH = "C:\Users\yyk82\anaconda3\Library\bin;C:\Users\yyk82\anaconda3\DLLs;" + $env:PATH
+python scripts/get_refresh_token.py client_secret.json
+```
 
 ## STEP 4. Blog ID 확인하기
 
@@ -213,3 +248,31 @@ Claude의 브라우저 자동화 환경에서는 `naver.com` 계열 도메인이
   메뉴 링크 12개가 전부 절대 URL로 저장되어 있어 **자동으로 갱신되지 않음** —
   직접 하나씩 수정해야 메뉴 클릭 시 404/연결 오류가 나지 않음 (자세한 내용은
   `theme/신문사_테마_가이드.md`의 "4-2. 블로그 주소 변경" 참고, 2026-10-18 실제 발생)
+
+## STEP 12. 장애 이력 — refresh token 만료로 자동 발행 실패 (2026-10-20)
+
+**증상**: 매일 아침 9시(KST) 자동 발행이 1주일 정도 잘 되다가 갑자기 실패.
+GitHub Actions 로그에 아래 에러:
+
+```
+google.auth.exceptions.RefreshError: ('invalid_grant: Token has been expired or revoked.', ...)
+```
+
+**원인**: STEP 2에서 OAuth 동의 화면 게시 상태를 "테스트 중"으로 둔 채 운영 중이었음.
+Google 정책상 "테스트 중" 상태에서 발급된 refresh token은 **발급 후 7일이 지나면
+자동으로 만료**됨(실제 사용 여부와 무관). 최초 설정 후 정확히 7일째 되는 날
+자동 발행이 깨짐.
+
+**해결 (영구 조치)**:
+1. Google Cloud Console → Google 인증 플랫폼 → 브랜딩에서 애플리케이션 홈페이지 /
+   개인정보처리방침 링크 / 승인된 도메인을 채워 넣음 (게시에 필요한 필수 입력값)
+2. "대상" 페이지 → "앱 게시" → "프로덕션으로 푸시" 확인 → 게시 상태가
+   "프로덕션 단계"로 전환됨 (Blogger scope는 민감/제한 범위가 아니라 Google
+   인증 심사 없이 즉시 적용됨). 이제부터는 refresh token이 7일 후 만료되지 않음.
+3. 이미 만료된 refresh token은 되살릴 수 없으므로, STEP 3을 다시 실행해 새
+   refresh token을 발급받고 GitHub Secret `GOOGLE_REFRESH_TOKEN`을 새 값으로 교체
+4. GitHub Actions → Daily Publish to Blogger → "Run workflow"로 그날 발행분을
+   수동 실행해 밀린 기사를 바로 발행함
+
+**재발 방지**: STEP 2/2-1에 "반드시 프로덕션으로 게시" 안내를 추가해 두었으므로,
+이 프로젝트를 처음부터 다시 설정하는 경우에도 같은 문제가 생기지 않음.
