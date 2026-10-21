@@ -1,7 +1,7 @@
 # 라하뉴스 자동화 설정 가이드
 
 이 문서를 처음부터 순서대로 따라 하면 '라하뉴스' 블로그가 매일 자동으로
-글 2개씩 올라오도록 설정됩니다. 콘텐츠 생성은 비용이 전혀 들지 않는
+글 5개씩 올라오도록 설정됩니다. 콘텐츠 생성은 비용이 전혀 들지 않는
 **Google Gemini API 무료 티어**를 사용하므로, 신용카드 등록이나 유료 결제가
 필요 없습니다. 각 기사에는 카테고리별로 고정 배정된 담당 기자 바이라인(이름 +
 이메일)이 들어가고, **Pollinations.ai(무료, 가입 불필요)**로 생성한 이미지가
@@ -105,8 +105,14 @@ https://www.blogger.com/blog/posts/1234567890123456789
 1. https://aistudio.google.com/apikey 접속 (블로그와 같은 구글 계정으로 로그인)
 2. **"Create API key"** 클릭 → 기존 Google Cloud 프로젝트(`search-news-automation`) 선택 또는 새 프로젝트 선택
 3. 생성된 키를 복사해 두세요 (`GEMINI_API_KEY`)
-4. 신용카드 등록이나 결제는 전혀 필요 없습니다. 무료 티어 한도(예: 분당 요청 수, 일일 요청 수) 내에서는
-   완전히 무료이며, 하루에 글 2개만 생성하므로 무료 한도를 넘을 일이 없습니다.
+4. 신용카드 등록이나 결제는 전혀 필요 없습니다. `gemini-flash-lite-latest` 모델 기준
+   무료 티어 한도는 대략 분당 15회, 일일 약 1,000회 수준이며(계정/프로젝트별로 다를 수
+   있음), 하루 5개 기사 생성(= 하루 5회 호출)은 이 한도에 크게 못 미쳐 완전히 무료로
+   운영됩니다. 하루 발행 개수를 늘리고 싶다면 `config/site.json`의 `posts_per_day`
+   값과 `.github/workflows/daily-publish.yml`의 `POSTS_PER_DAY` 값을 함께 올리면
+   되지만, Gemini 한도보다 **Blogger의 자동생성 콘텐츠 스팸 정책**과 `config/topics.json`
+   주제 소진 속도가 먼저 걸림돌이 되므로 과도하게 늘리지 않는 것을 권장합니다
+   (2026-10-21 기준 하루 5개로 설정, 주제 뱅크 205개로 확장함).
 5. 무료 한도가 궁금하면 https://ai.google.dev/gemini-api/docs/rate-limits 에서 확인할 수 있습니다.
 
 ## STEP 6. GitHub 저장소 만들고 Secrets 등록
@@ -159,12 +165,12 @@ python scripts/create_static_pages.py
 
 1. GitHub 저장소 → **Actions** 탭 → "Daily Publish to Blogger" 워크플로 선택
 2. **Run workflow** 버튼으로 수동 실행
-3. 몇 분 후 블로그에 글 2개가 올라오는지 확인
+3. 몇 분 후 블로그에 글 5개가 올라오는지 확인
 4. 문제가 있다면 Actions 실행 로그에서 에러 메시지를 확인 (Secrets 오타가 가장 흔한 원인)
 
 ## STEP 10. 운영
 
-- 이후로는 매일 한국시간 오전 9시에 자동으로 2개 글이 발행됩니다.
+- 이후로는 매일 한국시간 오전 9시에 자동으로 5개 글이 발행됩니다.
 - 발행 시간을 바꾸고 싶다면 `.github/workflows/daily-publish.yml`의 `cron` 값을 수정하세요
   (cron은 UTC 기준이며, KST는 UTC+9시입니다).
 - 주제가 바닥나면 `config/topics.json`에 새 항목을 추가해 주세요.
@@ -276,3 +282,34 @@ Google 정책상 "테스트 중" 상태에서 발급된 refresh token은 **발�
 
 **재발 방지**: STEP 2/2-1에 "반드시 프로덕션으로 게시" 안내를 추가해 두었으므로,
 이 프로젝트를 처음부터 다시 설정하는 경우에도 같은 문제가 생기지 않음.
+
+## STEP 13. 일일 발행 개수 조정 (2026-10-21, 2개 → 5개)
+
+**변경 내용**: 하루 발행 개수를 2개에서 5개로 늘림.
+- `config/site.json`의 `posts_per_day`: 2 → 5
+- `.github/workflows/daily-publish.yml`의 `POSTS_PER_DAY`: "2" → "5"
+- `config/topics.json`에 카테고리당 약 10개씩, 총 80개 주제를 추가(130개 → 205개)
+  하루 5개 기준으로도 약 40일간 중복 없이 순환 가능
+
+**판단 근거**: Gemini API(`gemini-flash-lite-latest`) 무료 티어 자체 한도는 분당
+15회, 일일 약 1,000회 수준으로 매우 넉넉해서 하루 수백 개도 이론상 가능하지만,
+아래 이유로 "API 한도만큼" 늘리지 않고 하루 5개로 제한함:
+- **Blogger 스팸 정책 위험**: 자동 생성 콘텐츠를 과도하게 빠른 속도로 대량 발행하면
+  Google의 "대규모 콘텐츠 품질 저하(scaled content abuse)" 정책에 걸려 블로그나
+  구글 계정이 정지될 위험이 있음 (`ADSENSE_CHECKLIST.md` 참고)
+- **주제 뱅크 고갈**: 주제 뱅크가 너무 빨리 소진되면 콘텐츠 다양성이 떨어짐
+- **GitHub Actions 실행 시간**: 기사 1개당 이미지 생성 포함 약 5~8분 소요. 5개면
+  약 25~40분으로 안전한 범위
+
+**추가 개선(안정성)**: `scripts/publish_to_blogger.py`를 수정해 발행 개수가 늘어난
+만큼 중간 실패의 영향도 커지는 문제에 대비함. 기존에는 하루치 전체(N개)를 다
+처리한 뒤 한 번에 `used_topics.json`/`category_cursor.json`을 저장했기 때문에,
+N개 중 일부(예: 3번째)에서 에러가 나면 이미 발행에 성공한 1~2번째 글의 주제도
+"사용함"으로 기록되지 않아 다음 실행 때 같은 주제로 중복 발행될 위험이 있었음.
+이제는 글 1개를 발행할 때마다 즉시 저장하도록 바꿔서, 중간에 실패해도 이미
+발행된 글까지는 정상적으로 기록되고 다음 실행에서 중복되지 않음.
+
+**발행 개수를 추가로 조정하려면**: `config/site.json`의 `posts_per_day`와
+`.github/workflows/daily-publish.yml`의 `POSTS_PER_DAY`를 같은 값으로 맞춰서
+수정하면 됨. 단, 위 "판단 근거"에 언급된 제약(특히 Blogger 스팸 정책)을 고려해
+과도하게 늘리지 않는 것을 권장함.

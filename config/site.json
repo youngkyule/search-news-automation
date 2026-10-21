@@ -2,7 +2,7 @@
   "site_name": "라하뉴스",
   "tagline": "오늘의 이슈, 내일의 인사이트",
   "editor_name": "라하뉴스 편집팀",
-  "posts_per_day": 2,
+  "posts_per_day": 5,
   "language": "ko",
   "model": "gemini-flash-lite-latest",
   "images_per_post": 4,
