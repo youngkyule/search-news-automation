@@ -8,10 +8,10 @@ from googleapiclient.discovery import build
 
 from common import (
     add_byline,
+    add_related_links,
     insert_images_into_html,
     load_site_config,
     pick_next_topics,
-    pick_reporter,
     save_category_cursor,
     save_used_topics,
 )
@@ -49,6 +49,24 @@ def publish_post(service, blog_id, article):
     )
 
 
+def add_related_links_after_publish(service, blog_id, res, article, category):
+    """발행 직후, 같은 카테고리의 다른 글로 이어지는 "함께 보면 좋은 글" 링크를
+    본문 끝에 추가한다(사이트 탐색성/구조적 유지관리 신호 보강, 2026-10-29).
+    발행된 글 자신이 글 목록에 섞여 들어오지 않도록 exclude_post_id로 제외한다."""
+    html_with_links = add_related_links(article["html"], service, blog_id, category, res["id"])
+    if html_with_links == article["html"]:
+        return
+    body = {
+        "title": article["title"],
+        "content": html_with_links,
+        "labels": article["labels"],
+    }
+    meta_description = article.get("meta_description")
+    if meta_description:
+        body["searchDescription"] = meta_description[:150]
+    service.posts().update(blogId=blog_id, postId=res["id"], body=body).execute()
+
+
 def main():
     site = load_site_config()
     count = int(os.environ.get("POSTS_PER_DAY", site.get("posts_per_day", 5)))
@@ -76,15 +94,14 @@ def main():
                 print(f"  -> {len(images)}장 생성 완료")
                 article["html"] = insert_images_into_html(article["html"], images)
 
-            reporter = pick_reporter(site)
-            article["html"] = add_byline(article["html"], reporter, site)
-            print(f"  [담당 기자] {reporter['name']} 기자 ({reporter['email']})")
+            article["html"] = add_byline(article["html"], None, site)
 
             if DRY_RUN:
                 print(f"  -> (DRY RUN) 제목: {article['title']}")
             else:
                 res = publish_post(service, blog_id, article)
                 print(f"  -> 발행 완료: {res.get('url')}")
+                add_related_links_after_publish(service, blog_id, res, article, category)
                 time.sleep(5)  # Blogger API 호출 간 약간의 간격
         except Exception as exc:
             print(f"  [실패] ({category}) {topic}: {exc}")

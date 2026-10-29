@@ -92,6 +92,61 @@ def resolve_category(labels, site):
     return known[0] if known else "생활정보"
 
 
+RELATED_MARKER = 'class="kn-related"'
+RELATED_BLOCK_RE = re.compile(r'<div[^>]*class="kn-related"[^>]*>.*?</div>\s*', re.DOTALL)
+
+
+def has_related_links(html):
+    return RELATED_MARKER in html
+
+
+def strip_related_links(html):
+    return RELATED_BLOCK_RE.sub("", html)
+
+
+def build_related_links_html(service, blog_id, category, exclude_post_id, max_links=3):
+    """같은 카테고리의 다른 글 링크를 모아 "함께 보면 좋은 글" 섹션을 만든다.
+
+    2026-10-29: 애드센스 승인 거절 사유("가치가 별로 없는 콘텐츠",
+    "지속적인 콘텐츠 큐레이션 및 구조적 유지관리") 대응으로 추가. 글마다
+    같은 주제군의 다른 글로 이어지는 내부 링크를 둬서 사이트 탐색성과
+    체류를 돕는다. Blogger API 호출이 실패해도(예: 아직 같은 카테고리
+    글이 없음) 발행 자체가 막히면 안 되므로 예외를 삼키고 빈 문자열을
+    반환한다."""
+    try:
+        resp = (
+            service.posts()
+            .list(blogId=blog_id, labels=category, maxResults=max_links + 1, orderBy="PUBLISHED")
+            .execute()
+        )
+    except Exception as exc:
+        # 관련 글 조회 실패는 발행 자체를 막을 정도는 아니므로 삼키되,
+        # 조용히 사라지면 디버그가 어려우니(2026-10-29 orderBy 대소문자
+        # 오타로 전수 실패했던 사례) 로그는 남긴다.
+        print(f"  [관련 글 조회 실패] {category}: {exc}")
+        return ""
+
+    items = [p for p in resp.get("items", []) if p.get("id") != exclude_post_id][:max_links]
+    if not items:
+        return ""
+
+    links = "".join(f'<li><a href="{p["url"]}">{p["title"]}</a></li>' for p in items)
+    return (
+        f'<div {RELATED_MARKER} style="margin-top:24px;padding-top:16px;border-top:1px solid #ddd;">'
+        f"<strong>함께 보면 좋은 글</strong><ul>{links}</ul></div>"
+    )
+
+
+def add_related_links(html, service, blog_id, category, exclude_post_id, max_links=3):
+    """이미 관련 글 섹션이 있으면 그대로 두고, 없으면 맨 끝에 추가한다."""
+    if has_related_links(html):
+        return html
+    section = build_related_links_html(service, blog_id, category, exclude_post_id, max_links)
+    if not section:
+        return html
+    return html + "\n" + section
+
+
 def _image_tag(image_url, alt):
     """image_url: 외부 이미지 URL(예: Pollinations.ai). base64로 본문에 직접 삽입하면
     글 용량이 커져 Blogger의 다중 게시물 페이지(홈/검색)에서 응답 크기 제한에 걸려
@@ -140,14 +195,21 @@ def pick_reporter(site):
 
 
 def build_byline_html(reporter, site):
-    """신문 기사처럼 [매체명] 기자명 기자 | 이메일 형태의 바이라인을 만든다."""
+    """바이라인을 만든다.
+
+    2026-10-29: 애드센스 승인 거절 사유("가치가 별로 없는 콘텐츠") 대응으로
+    변경. 기존에는 실재하지 않는 개인 기자명과 존재하지 않는 개인 이메일
+    (예: "김민지 기자 | minji.kim@rahanews.com")을 매 글마다 무작위로
+    표기했는데, 이는 AI가 작성한 글을 실제 취재기자가 작성한 것처럼 보이게
+    해 Google 게시자 정책의 "오해의 소지가 있는 표현"(제작자에 대한 허위
+    전달)에 해당할 소지가 있었다. 가상의 개인을 내세우지 않고 운영 주체를
+    있는 그대로 밝히는 편집팀 명의로 통일한다. `reporter` 인자는 호출부
+    호환을 위해 유지하지만 더 이상 출력에 사용하지 않는다."""
     site_name = site.get("site_name", "라하뉴스")
-    name = reporter.get("name", "편집팀")
-    email = reporter.get("email", "")
-    email_part = f' | <a href="mailto:{email}">{email}</a>' if email else ""
+    editor_name = site.get("editor_name", f"{site_name} 편집팀")
     return (
         f'<p {BYLINE_MARKER} style="color:#666;font-size:14px;margin:0 0 20px 0;">'
-        f"[{site_name}] {name} 기자{email_part}</p>"
+        f"[{editor_name} 작성]</p>"
     )
 
 
