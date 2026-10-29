@@ -147,6 +147,80 @@ def add_related_links(html, service, blog_id, category, exclude_post_id, max_lin
     return html + "\n" + section
 
 
+FAQ_JSONLD_MARKER = 'data-kn-faq="1"'
+# generate_article.py가 명시적으로 강제하는 형식(2026-10-29부터)은 패턴 1이지만,
+# 그 이전에 발행된 글들은 모델이 조금씩 다르게 FAQ를 구성해 패턴 2/3도 등장한다.
+FAQ_PATTERNS = [
+    # <p><strong>Q...?</strong><br>A...</p>
+    re.compile(r"<p>\s*<strong>\s*(Q.*?)\s*</strong>\s*<br\s*/?>\s*(A.*?)\s*</p>", re.DOTALL | re.IGNORECASE),
+    # <li><strong>Q...?</strong> ... <p>A...</p> ... </li>
+    re.compile(r"<li>\s*<strong>\s*(Q[^<]*?)\s*</strong>.*?<p>\s*(A.*?)\s*</p>.*?</li>", re.DOTALL | re.IGNORECASE),
+    # <h2/h3/h4>Q...?</h2/h3/h4><p>A...</p>
+    re.compile(r"<h[234]>\s*(Q[^<]*?)\s*</h[234]>\s*<p>\s*(A.*?)\s*</p>", re.DOTALL | re.IGNORECASE),
+]
+FAQ_PREFIX_RE = re.compile(r"^[QA]\d*[.):]?\s*", re.IGNORECASE)
+_TAG_RE = re.compile(r"<[^>]+>")
+
+
+def has_faq_jsonld(html):
+    return FAQ_JSONLD_MARKER in html
+
+
+def extract_faq_pairs(html):
+    """본문에서 FAQ 문답을 뽑아낸다. generate_article.py의 SYSTEM_PROMPT가
+    요구하는 형식(패턴 1)을 우선 시도하고, 2026-10-29 이전에 발행되어 모델이
+    다르게 구성한 글을 위해 패턴 2·3도 순서대로 시도한다. 어떤 패턴과도
+    일치하지 않으면 빈 리스트를 반환하며, 이 경우 FAQPage 구조화 데이터를
+    추가하지 않는다(잘못된 데이터를 넣는 것보다 생략하는 편이 안전함)."""
+    for pattern in FAQ_PATTERNS:
+        pairs = []
+        for q_html, a_html in pattern.findall(html):
+            q = FAQ_PREFIX_RE.sub("", _TAG_RE.sub("", q_html)).strip()
+            a = FAQ_PREFIX_RE.sub("", _TAG_RE.sub("", a_html)).strip()
+            if q and a:
+                pairs.append((q, a))
+        if pairs:
+            return pairs
+    return []
+
+
+def build_faqpage_jsonld(html):
+    """FAQ 문답을 schema.org FAQPage 구조화 데이터로 변환한다.
+
+    2026-10-29: 애드센스 재신청 전 "실제적인 사용자 관심" 보강을 위해 추가.
+    검색결과에서 FAQ 아코디언이 함께 노출되면 클릭률(CTR)이 올라가는
+    효과가 입증되어 있고, 봇/가짜 트래픽이 아닌 합법적인 방법이다."""
+    pairs = extract_faq_pairs(html)
+    if not pairs:
+        return ""
+    data = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": q,
+                "acceptedAnswer": {"@type": "Answer", "text": a},
+            }
+            for q, a in pairs
+        ],
+    }
+    return (
+        f'<script type="application/ld+json" {FAQ_JSONLD_MARKER}>'
+        f"{json.dumps(data, ensure_ascii=False)}</script>"
+    )
+
+
+def add_faq_jsonld(html):
+    """이미 FAQPage 구조화 데이터가 있으면 그대로 두고, 없으면 추가한다."""
+    if has_faq_jsonld(html):
+        return html
+    script = build_faqpage_jsonld(html)
+    if not script:
+        return html
+    return html + "\n" + script
+
+
 def _image_tag(image_url, alt):
     """image_url: 외부 이미지 URL(예: Pollinations.ai). base64로 본문에 직접 삽입하면
     글 용량이 커져 Blogger의 다중 게시물 페이지(홈/검색)에서 응답 크기 제한에 걸려

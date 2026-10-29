@@ -8,6 +8,7 @@ from googleapiclient.discovery import build
 
 from common import (
     add_byline,
+    add_faq_jsonld,
     add_related_links,
     insert_images_into_html,
     load_site_config,
@@ -86,6 +87,7 @@ def main():
         print(f"[생성 중] ({category}) {topic}")
         try:
             article = generate_article(category, topic, model=site.get("model", "gemini-flash-lite-latest"))
+            article["html"] = add_faq_jsonld(article["html"])
 
             images_per_post = int(site.get("images_per_post", 4))
             if images_per_post > 0:
