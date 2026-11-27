@@ -20,7 +20,7 @@ blog_id = os.environ["BLOGGER_BLOG_ID"]
 
 posts, token = [], None
 while True:
-    r = svc.posts().list(blogId=blog_id, maxResults=100, pageToken=token, fetchBodies=False, status="live").execute()
+    r = svc.posts().list(blogId=blog_id, maxResults=100, pageToken=token, fetchBodies=False, status="LIVE").execute()
     posts += r.get("items", [])
     token = r.get("nextPageToken")
     if not token: break
