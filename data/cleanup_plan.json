@@ -1,0 +1,816 @@
+{
+ "keep": [
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/24-5.html",
+   "title": "전입신고 인터넷으로 하는 법, 정부24로 5분 만에 끝내는 방법",
+   "len": 2067
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_795.html",
+   "title": "국비지원 교육 찾는 법: 내일배움카드 신청부터 과정 검색까지 완벽 가이드",
+   "len": 2038
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/5_0661625684.html",
+   "title": "크롬 브라우저 느려질 때 속도 확 빨라지는 해결법 5가지",
+   "len": 2018
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_111.html",
+   "title": "무보험 차량 사고 대처법, 당황하지 않고 보상 받는 실전 가이드",
+   "len": 2016
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/5_01711453143.html",
+   "title": "후회 없는 중고차 구매를 위한 필수 체크리스트 5가지",
+   "len": 2005
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/4_0342405370.html",
+   "title": "자격증 취득 우선순위 정하는 법, 시간 낭비 줄이는 기준 4가지",
+   "len": 2002
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_784.html",
+   "title": "해외직구 관세 계산 방법 및 면세 한도 기준 총정리",
+   "len": 1997
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_19.html",
+   "title": "신용카드 분실 신고 방법 및 재발급 절차 총정리",
+   "len": 1996
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/5_0943069468.html",
+   "title": "화장실 변기 물때 제거법: 붉은 곰팡이와 물때 없애는 5가지 방법",
+   "len": 1991
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_753.html",
+   "title": "교통사고 과실비율 확인법과 이의신청 방법",
+   "len": 1980
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_22.html",
+   "title": "대출 중도상환수수료 계산법 및 면제 조건 총정리",
+   "len": 1966
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/4_01592694397.html",
+   "title": "이불 진드기 제거하는 법, 완벽 박멸을 위한 4단계 관리법",
+   "len": 1961
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_192.html",
+   "title": "상속포기 신청 방법과 절차, 기간, 주의사항 총정리",
+   "len": 1961
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_02.html",
+   "title": "신입사원 회사 적응 꿀팁: 첫 달 멘탈 관리부터 업무 요령까지",
+   "len": 1942
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_953.html",
+   "title": "공무원 시험 준비 방법: 합격생들이 실천한 과목별 공부법과 루틴",
+   "len": 1930
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_187.html",
+   "title": "카카오톡 대화 백업, 왜 미리 해두어야 할까요?",
+   "len": 1917
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_840.html",
+   "title": "주민등록등본 인터넷 발급 방법 및 무료 출력 가이드",
+   "len": 1909
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_119.html",
+   "title": "실업급여 신청 조건과 절차 완벽 가이드",
+   "len": 1903
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_18.html",
+   "title": "경력단절 재취업 준비법: 현실적인 구직 전략과 단계별 가이드",
+   "len": 1900
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_529.html",
+   "title": "저혈압 어지럼증 완화법, 일상에서 실천하는 대처 가이드",
+   "len": 1894
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_244.html",
+   "title": "스트레스성 탈모 관리법, 초기 원인 파악과 회복 가이드",
+   "len": 1888
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_16.html",
+   "title": "소화불량 해결하는 법, 속 더부룩할 때 빠른 대처법",
+   "len": 1884
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_463.html",
+   "title": "변비 해결하는 법, 약 없이 식습관과 생활 습관으로 탈출하기",
+   "len": 1874
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_98.html",
+   "title": "온라인 쇼핑 환불 지연 대처법과 판매자 연락 안 될 때 해결 순서",
+   "len": 1871
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/4_01399792627.html",
+   "title": "역류성 비염 생활 관리법 증상 완화 꿀팁 4가지",
+   "len": 1860
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_561.html",
+   "title": "경력증명서 발급 방법 인터넷 및 무인발급기 총정리",
+   "len": 1847
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/pc-5.html",
+   "title": "PC 와이파이 안 잡힐 때 해결법 5가지",
+   "len": 1839
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/4_01351936990.html",
+   "title": "아이폰 사진 용량 줄이는 법 4가지 설정 꿀팁",
+   "len": 1833
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/pc_01009450099.html",
+   "title": "PC 블루스크린 원인 분석과 집에서 하는 해결법 총정리",
+   "len": 1817
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_864.html",
+   "title": "세탁기 냄새 제거하는 방법, 곰팡이와 꿉꿉한 냄새 없애는 완벽 가이드",
+   "len": 1810
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/5_0431829127.html",
+   "title": "갤럭시 발열 문제 원인과 실용적인 해결 방법 5가지",
+   "len": 1801
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_581.html",
+   "title": "형사 고소장 작성법: 경찰서 제출용 양식과 필수 기재 사항",
+   "len": 1800
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_321.html",
+   "title": "자동차 경고등 종류별 의미와 색상별 대처 방법 총정리",
+   "len": 1781
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_960.html",
+   "title": "집에서 손쉽게 하는 커튼 세탁하는 방법과 소재별 주의사항",
+   "len": 1779
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_21.html",
+   "title": "주차 위반 과태료 이의신청 방법과 절차 총정리",
+   "len": 1776
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_23.html",
+   "title": "특례보금자리론 신청 조건과 자격 요건 총정리",
+   "len": 1766
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_256.html",
+   "title": "임차권등기명령 신청 방법과 절차, 보증금 지키는 핵심 가이드",
+   "len": 1762
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/5_0847259151.html",
+   "title": "신발장 냄새 없애는 법, 원인부터 확실하게 해결하는 5가지 방법",
+   "len": 1753
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/4.html",
+   "title": "서류 합격률을 높이는 실전 이력서 작성 꿀팁 4가지",
+   "len": 1752
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_948.html",
+   "title": "하이패스 미납 요금 조회 및 납부 방법 총정리",
+   "len": 1751
+  }
+ ],
+ "draft": [
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/2025_0400618070.html",
+   "title": "2025 자동차세 연납 할인 신청 방법과 기간 완벽 정리",
+   "reason": "stale-year"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/pc-5_0515736933.html",
+   "title": "PC 와이파이 안 잡힐 때 해결법 5가지",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_27.html",
+   "title": "커튼 세탁 방법: 원단별 손상 없이 집에서 세탁하는 요령",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_853.html",
+   "title": "겨울철 자동차 시동 안 걸릴 때 당황하지 않고 대처하는 방법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_6330.html",
+   "title": "신용카드 한도 올리는 방법, 심사 기준과 상향 팁 총정리",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_373.html",
+   "title": "손발톱 무좀 관리법 완벽 정리: 초기 증상부터 생활 속 예방까지",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_26.html",
+   "title": "카카오톡 백업 및 복원 방법, 대화내용 유실 없이 옮기는 완벽 가이드",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_24.html",
+   "title": "카카오톡 대화 내용 백업 및 복원 방법 완벽 정리",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_548.html",
+   "title": "블랙박스 메모리카드 포맷 방법과 주기 총정리",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_692.html",
+   "title": "협의이혼 절차와 필요 서류, 기간부터 비용까지 총정리",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/4_01957717054.html",
+   "title": "자기소개서 잘 쓰는 법: 광탈을 피하는 4단계 작성법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_410.html",
+   "title": "쿠팡 반품 신청 방법부터 수거·환불까지 총정리",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_240.html",
+   "title": "타이어 공기압 경고등 원인과 계절별 대처법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_602.html",
+   "title": "인감증명서 발급 방법 및 준비물, 대리인 신청 시 필요 서류 총정리",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_802.html",
+   "title": "화상면접 준비 팁: 합격을 부르는 세팅과 실전 노하우",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_433.html",
+   "title": "포인트 적립 앱(앱테크) 종류별 특징과 효율적인 활용법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_453.html",
+   "title": "전기차 충전 요금 확인법 완벽 정리: 모델별·사업자별 요금 조회",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_260.html",
+   "title": "프린터 인쇄 안될 때 해결법: 단계별 조치 방법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_132.html",
+   "title": "욕실 타일 줄눈 곰팡이 제거법과 완벽한 예방 가이드",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_549.html",
+   "title": "퇴사 후 실업급여 받는 법, 조건부터 신청 절차 총정리",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_20.html",
+   "title": "무보험 차량 사고 대처법, 당황하지 않고 보상 받는 순서",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_466.html",
+   "title": "만성피로 극복하는 법: 아침마다 일어나는 게 힘든 이유와 해결 가이드",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/1_01942311322.html",
+   "title": "주택청약 1순위 조건 완벽 정리, 가입 기간과 납입 횟수 기준",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_615.html",
+   "title": "스트레스성 탈모 관리법, 초기 원인 파악부터 회복까지",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/1.html",
+   "title": "인스타그램 계정 해킹 당했을 때 1분 만에 대처하는 방법",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/5_01663973278.html",
+   "title": "겨울철 결로 현상 해결법 5가지와 곰팡이 방지 팁",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_726.html",
+   "title": "소액 민사소송 절차 기간 비용 혼자서 하는 방법",
+   "reason": "stale-year"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/pc_0219738485.html",
+   "title": "PC 블루스크린 원인과 오류 코드별 해결법 총정리",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/3_01046848881.html",
+   "title": "화장실 변기 물때 제거법: 붉은 때와 찌든 때 없애는 3가지 방법",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_427.html",
+   "title": "실업급여 신청 조건과 절차 완벽 가이드",
+   "reason": "stale-year"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_521.html",
+   "title": "소화불량 해결하는 법, 일상에서 실천하는 속 편한 관리법",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/pc_01292180737.html",
+   "title": "PC 블루스크린 원인과 해결법: 갑작스러운 오류 대처 가이드",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_13.html",
+   "title": "화장실 변기 물때 제거법, 락스 없이 반짝반짝 청소하는 꿀팁",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_942.html",
+   "title": "실업급여 신청 조건과 절차 완벽 가이드",
+   "reason": "stale-year"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_12.html",
+   "title": "소화불량 해결하는 법, 속 더부룩할 때 빠른 대처 가이드",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/3.html",
+   "title": "화장실 변기 물때 제거법: 붉은 떼와 곰팡이 없애는 3단계",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/pc-5_01601201239.html",
+   "title": "PC 블루스크린 원인 분석과 집에서 하는 5가지 해결법",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/10_02134972739.html",
+   "title": "화장실 변기 물때 제거법, 락스 없이 10분 만에 청소하는 꿀팁",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_776.html",
+   "title": "교통사고 합의 절차와 시기, 현명한 대처 방법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_09.html",
+   "title": "신용점수 올리는 방법, 연체 해제부터 비금융 정보 등록까지 핵심 요약",
+   "reason": "stale-year"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/10.html",
+   "title": "거북목 교정 운동법 하루 10분 스트레칭 자세 교정",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_08.html",
+   "title": "항공권 저렴하게 구매하는 법, 예매 타이밍과 검색 꿀팁",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/4_01139478863.html",
+   "title": "임대차계약 갱신 거절 사유 4가지와 세입자가 꼭 알아야 할 대처법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/2024.html",
+   "title": "2024 근로장려금 신청 자격 조건과 소득·재산 기준 총정리",
+   "reason": "stale-year"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/5_0574604571.html",
+   "title": "눈 건강 지키는 방법, 일상 속 피로 푸는 5가지 관리법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_920.html",
+   "title": "택배 분실 시 대처법, 배송완료 후 사라졌다면?",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/pc_01740149150.html",
+   "title": "교통법규 위반 조회 방법 총정리 (모바일·PC 간편 확인)",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_07.html",
+   "title": "청년도약계좌 신청 조건 및 소득·나이 기준 완벽 정리",
+   "reason": "stale-year"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_171.html",
+   "title": "설거지 기름때 쉽게 없애는 법, 주방세제 없이 지우는 꿀팁",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/5_01293607277.html",
+   "title": "안전한 중고거래 사기 예방법 5가지와 더치트 조회 방법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_05.html",
+   "title": "자동차 와이퍼 교체 시기와 증상, 셀프 교체 방법 총정리",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/24.html",
+   "title": "전입신고 인터넷으로 하는 법, 정부24 신청 방법과 주의사항",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_302.html",
+   "title": "아이클라우드 용량 늘리는 법과 단계별 정리 요령",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_713.html",
+   "title": "신발 냄새 제거 꿀팁: 하루 만에 발 냄새 없애는 법",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_699.html",
+   "title": "알뜰폰 요금제 비교하는 법: 나에게 맞는 최적의 통신사 찾는 요령",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_04.html",
+   "title": "자동차 에어컨 냄새 제거법: 송풍구 시큼한 냄새 완벽 해결",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/pc.html",
+   "title": "유튜브 프리미엄 해지하는 방법 PC와 모바일 총정리",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_03.html",
+   "title": "당근마켓 직거래 안전 수칙 및 사기 예방 가이드",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/2025.html",
+   "title": "2025 자동차세 연납 신청 방법 및 할인율 총정리",
+   "reason": "stale-year"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_856.html",
+   "title": "변비 해결하는 법, 약 없이 식습관과 배변 습관으로 개선하기",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_146.html",
+   "title": "신용카드 한도 올리는 방법과 승인 확률 높이는 꿀팁",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post_01.html",
+   "title": "손발톱 무좀 관리법 홈케어부터 병원 치료까지",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/blog-post.html",
+   "title": "카카오톡 백업 및 복원 방법, 대화내용 안 날리는 완벽 가이드",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/11/5.html",
+   "title": "여름철 음식물쓰레기 냄새 없애는 확실한 방법 5가지",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_535.html",
+   "title": "혼인신고 하는 방법, 준비물부터 작성 요령까지 총정리",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_276.html",
+   "title": "특례보금자리론 신청 조건 및 자격 요건 완벽 정리",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_31.html",
+   "title": "역류성 비염 생활 관리법 증상 완화 꿀팁",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_642.html",
+   "title": "신용카드 분실 신고 방법과 재발급 절차 총정리",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_273.html",
+   "title": "자동차 유리 김서림 없애는 법 원인부터 예방 팁까지",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_677.html",
+   "title": "보증금 반환 지연 대처법, 임대차 계약 종료 후 내용증명부터",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_30.html",
+   "title": "대출 중도상환수수료 계산법과 면제 조건 총정리",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/5_01395157174.html",
+   "title": "역류성 식도염 증상 완화하는 실생활 관리법 5가지",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_807.html",
+   "title": "경력단절 재취업 준비법, 성공적인 일자리 찾는 단계별 가이드",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_563.html",
+   "title": "알리익스프레스 반품하는 법: 신청부터 환불까지 총정리",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/1-3.html",
+   "title": "타이어 교체 시기 확인법, 초보 운전자도 1분 만에 아는 3가지 방법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_953.html",
+   "title": "반려동물 등록 방법과 과태료 피하는 절차 총정리",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_29.html",
+   "title": "정부지원금 통합 조회 방법, 놓치고 있던 내 돈 찾는 법",
+   "reason": "stale-year"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_751.html",
+   "title": "욕실 타일 줄눈 곰팡이 제거법과 완벽한 예방 팁",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/ncs.html",
+   "title": "공기업 취준생 필수, NCS 필기시험 준비법과 합격 공부 팁",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/100.html",
+   "title": "잠자는 네이버페이 포인트 활용법, 100% 알뜰하게 쓰는 꿀팁",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/3_01051908501.html",
+   "title": "내 차도 대상일까? 자동차 리콜 조회 방법 3가지",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_28.html",
+   "title": "벌금 분납 신청 방법과 자격 조건, 낼 돈이 없을 때 대처법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/5_0780167025.html",
+   "title": "크롬 브라우저 느려질 때 간단하게 해결하는 방법 5가지",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_999.html",
+   "title": "이불 진드기 제거하는 법, 확실하게 없애는 실내 세탁 및 관리법",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_550.html",
+   "title": "합격을 부르는 포트폴리오 작성 꿀팁과 실전 가이드",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/3.html",
+   "title": "구독 서비스 해지하는 법, 잊고 있던 숨은 돈 찾는 3가지 방법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_27.html",
+   "title": "자동차 급발진 의심 상황 발생 시 반드시 알아야 할 대처법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_26.html",
+   "title": "인스타그램 계정 해킹 당했을 때 뚫린 계정 되찾는 대처법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/5_01689731325.html",
+   "title": "겨울철 결로 현상 원인과 곰팡이 방지 해결법 5가지",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/24.html",
+   "title": "재직증명서 인터넷 발급 방법 및 정부24 무료 발급 총정리",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/5_0208735030.html",
+   "title": "온라인 쇼핑몰 사기 확인법 5가지, 피해 예방하는 안전한 거래 방법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_554.html",
+   "title": "실업급여 신청 조건과 절차 완벽 가이드",
+   "reason": "stale-year"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/5_01636141815.html",
+   "title": "급체했을 때 소화불량 해결하는 법, 효과적인 대처 5가지",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/pc.html",
+   "title": "PC 블루스크린 원인과 해결법: 갑자기 뜬 에러 대처",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_9267.html",
+   "title": "화장실 변기 물때 제거법, 힘들이지 않고 반짝반짝 청소하는 꿀팁",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_25.html",
+   "title": "퇴사 통보 기간과 절차, 법적 기준과 원만한 사직 방법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_442.html",
+   "title": "층간소음 신고 방법, 이웃사이센터부터 법적 대응까지",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/5-1.html",
+   "title": "신용점수 올리는 방법 5가지, 1분 만에 올리는 현실적인 팁",
+   "reason": "stale-year"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_559.html",
+   "title": "거북목 교정 운동법, 집에서 쉽게 따라 하는 스트레칭",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/5_01648812315.html",
+   "title": "갤럭시 발열 문제 원인과 손쉬운 해결 방법 5가지",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_24.html",
+   "title": "창틀 곰팡이 제거하는 법: 베이킹소다와 과탄산소다로 완벽하게 없애기",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_383.html",
+   "title": "자동차 에어컨 냄새 제거법, 확실한 원인 차단과 셀프 청소 꿀팁",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/2024.html",
+   "title": "2024 근로장려금 신청 자격, 소득·재산 기준 완벽 정리",
+   "reason": "stale-year"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_887.html",
+   "title": "눈 건강 지키는 방법, 일상에서 실천하는 시력 보호 팁",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_23.html",
+   "title": "와이파이 속도 느릴 때 해결법, 공유기 설정부터 위치까지 총정리",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/5_0407802169.html",
+   "title": "당근마켓 직거래 안전 수칙, 사기 안 당하는 법 5가지",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_150.html",
+   "title": "자동차 배터리 방전 대처법! 시동 안 걸릴 때 해결 방법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_538.html",
+   "title": "청년도약계좌 신청 조건 및 소득 요건 총정리",
+   "reason": "stale-year"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_22.html",
+   "title": "다이어트 정체기 극복법, 체중 감량 막는 원인과 해결 팁",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_116.html",
+   "title": "스마트폰 저장공간 늘리는 법, 사진부터 캐시까지 용량 확보 꿀팁",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_21.html",
+   "title": "벽지 곰팡이 제거 방법 완벽 가이드: 원인부터 재발 방지까지",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/4.html",
+   "title": "자기소개서 잘 쓰는 법: 합격을 부르는 4단계 작성 가이드",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/1.html",
+   "title": "쿠팡 반품 신청하는 방법, 마이쿠팡에서 1분 만에 끝내기",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_19.html",
+   "title": "타이어 공기압 경고등 원인과 겨울철 대처법",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_866.html",
+   "title": "연말정산 환급금 조회 방법 홈택스 간편 확인법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_18.html",
+   "title": "수면장애 해결하는 법, 밤마다 뒤척이는 나를 위한 숙면 가이드",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_17.html",
+   "title": "기름때가 잘 지워지지 않는 근본적인 이유와 해결법",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_16.html",
+   "title": "옷장 습기가 차는 근본적인 원인과 해결법",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/5.html",
+   "title": "신발에서 지독한 냄새가 나는 원인",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_14.html",
+   "title": "에어컨에서 곰팡이 냄새가 나는 근본적인 원인",
+   "reason": "duplicate-topic"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post_13.html",
+   "title": "세탁기에서 퀴퀴한 냄새가 나는 주요 원인",
+   "reason": "low-priority"
+  },
+  {
+   "url": "https://rahanews-kr.blogspot.com/2026/10/blog-post.html",
+   "title": "변기가 막히는 주요 원인",
+   "reason": "duplicate-topic"
+  }
+ ]
+}
