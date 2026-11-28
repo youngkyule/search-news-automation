@@ -19,7 +19,37 @@ from common import (
 from generate_article import generate_article
 from generate_images import generate_images_for_article
 
+from add_sources import block as sources_block, pick as pick_sources  # noqa: E402
+
 DRY_RUN = os.environ.get("DRY_RUN", "false").lower() == "true"
+DUP_THRESHOLD = 0.6  # 새 주제의 글자 2-gram 중 기존 제목에 들어 있는 비율이 이 값 이상이면 같은 주제로 보고 건너뛴다
+
+
+def _bigrams(s):
+    s = "".join(ch for ch in s if ch.isalnum())
+    return {s[i : i + 2] for i in range(len(s) - 1)}
+
+
+def is_duplicate_topic(topic, live_titles):
+    """이미 게시된 글 제목과 주제가 너무 비슷하면 True (같은 주제 반복 발행 방지)."""
+    a = _bigrams(topic)
+    if not a:
+        return False
+    for t in live_titles:
+        b = _bigrams(t)
+        if b and len(a & b) / len(a) >= DUP_THRESHOLD:
+            return True
+    return False
+
+
+def fetch_live_titles(service, blog_id):
+    titles, token = [], None
+    while True:
+        r = service.posts().list(blogId=blog_id, maxResults=100, pageToken=token, fetchBodies=False, status="LIVE").execute()
+        titles += [p["title"] for p in r.get("items", [])]
+        token = r.get("nextPageToken")
+        if not token:
+            return titles
 
 
 def get_blogger_service():
@@ -70,7 +100,7 @@ def add_related_links_after_publish(service, blog_id, res, article, category):
 
 def main():
     site = load_site_config()
-    count = int(os.environ.get("POSTS_PER_DAY", site.get("posts_per_day", 5)))
+    count = int(os.environ.get("POSTS_PER_DAY", site.get("posts_per_day", 1)))
 
     picked, _, _ = pick_next_topics(count)
     if not picked:
@@ -80,14 +110,29 @@ def main():
     service = None if DRY_RUN else get_blogger_service()
     blog_id = os.environ.get("BLOGGER_BLOG_ID")
 
+    live_titles = [] if DRY_RUN else fetch_live_titles(service, blog_id)
+
     results = []
     failed = None
     for i, item in enumerate(picked):
         category, topic = item["category"], item["topic"]
+        if is_duplicate_topic(topic, live_titles):
+            print(f"[건너뜀] 이미 비슷한 글이 있음: ({category}) {topic}")
+            if not DRY_RUN:
+                _, used_so_far, cursor_so_far = pick_next_topics(i + 1)
+                save_used_topics(sorted(used_so_far))
+                save_category_cursor(cursor_so_far)
+            continue
         print(f"[생성 중] ({category}) {topic}")
         try:
             article = generate_article(category, topic, model=site.get("model", "gemini-flash-lite-latest"))
+            # 제목 기준으로도 한 번 더 중복 확인
+            if is_duplicate_topic(article["title"], live_titles):
+                raise ValueError(f"생성된 제목이 기존 글과 너무 비슷함: {article['title']}")
             article["html"] = add_faq_jsonld(article["html"])
+            srcs = pick_sources(article["title"])
+            if srcs:
+                article["html"] = article["html"].rstrip() + "\n" + sources_block(srcs)
 
             images_per_post = int(site.get("images_per_post", 4))
             if images_per_post > 0:
@@ -97,6 +142,8 @@ def main():
                 article["html"] = insert_images_into_html(article["html"], images)
 
             article["html"] = add_byline(article["html"], None, site)
+            # 라벨은 카테고리 1개로 통일한다(글마다 제각각인 키워드 라벨이 수십 개 생기는 것을 방지).
+            article["labels"] = [category]
 
             if DRY_RUN:
                 print(f"  -> (DRY RUN) 제목: {article['title']}")
@@ -111,6 +158,7 @@ def main():
             break
 
         results.append({"category": category, "topic": topic, "title": article["title"]})
+        live_titles.append(article["title"])
 
         if not DRY_RUN:
             # 이미 발행에 성공한 글까지만 반영한 상태를 즉시 저장한다.
