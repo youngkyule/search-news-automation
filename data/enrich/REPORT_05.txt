@@ -1,0 +1,1 @@
+Post 05: '성능점검기록부 발급일 120일 이내' not verified on any official page (KCA older guidance said 90일). 30일/2,000km 보증 matches MOLIT Q&A (seen only via search snippet; molit page fetch failed). Typo '가상해 봐야' (가늠). 침수/해제기간 numbers deliberately not stated.

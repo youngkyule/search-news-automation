@@ -1,0 +1,56 @@
+<p class="kn-byline" style="color:#666;font-size:14px;margin:0 0 20px 0;">[라하뉴스 편집팀 작성]</p>
+<p>갑자기 노트북이나 데스크탑에서 와이파이 목록이 아예 뜨지 않거나 연결이 끊기는 현상을 겪어보신 적이 있으신가요? 중요한 업무를 처리해야 하거나 온라인 강의를 들어야 할 때 이런 문제가 발생하면 굉장히 난감합니다. 라하뉴스에서 복잡한 설정 없이 누구나 10분 만에 시도해 볼 수 있는 실용적인 PC 와이파이 오류 해결 방법을 정리해 드립니다.</p>
+
+<figure class="rn-img" style="margin:18px 0;text-align:center;"><img src="https://raw.githubusercontent.com/youngkyule/search-news-automation/main/assets/blog/27-1.jpg" alt="PC 와이파이 안 잡힐 때 해결법 5가지 관련 이미지 1" loading="lazy" style="max-width:100%;height:auto;border-radius:8px;"/><figcaption style="font-size:12px;color:#888;margin-top:4px;">이미지: AI 생성(Google Flow)</figcaption></figure>
+<h2>1. 네트워크 어댑터 전원 재설정하기</h2>
+<p>소프트웨어 일시적 오류로 인해 와이파이 장치 자체가 인식을 멈추는 경우가 가장 흔합니다. 이럴 때는 네트워크 어댑터를 강제로 껐다가 켜는 것만으로도 문제가 해결될 수 있습니다.</p>
+<ul>
+  <li><strong>준비물:</strong> 마우스</li>
+  <li><strong>소요 시간:</strong> 2분</li>
+  <li><strong>절차:</strong><br>
+    1. 윈도우 시작 버튼을 마우스 우클릭한 후 '장치 관리자'를 선택합니다.<br>
+    2. 목록에서 '네트워크 어댑터' 항목을 더블클릭해 펼칩니다.<br>
+    3. 본인 PC의 무선 랜카드 이름(예: Intel Wireless..., Realtek Wi-Fi 등)을 찾아서 마우스 우클릭을 합니다.<br>
+    4. '디바이스 사용 안 함'을 클릭한 뒤, 알림 창이 뜨면 확인을 누릅니다.<br>
+    5. 5초 정도 기다린 후 다시 해당 장치를 우클릭하고 '디바이스 사용'을 선택하여 어댑터를 활성화합니다.
+  </li>
+</ul>
+
+<figure class="rn-img" style="margin:18px 0;text-align:center;"><img src="https://raw.githubusercontent.com/youngkyule/search-news-automation/main/assets/blog/27-2.jpg" alt="PC 와이파이 안 잡힐 때 해결법 5가지 관련 이미지 2" loading="lazy" style="max-width:100%;height:auto;border-radius:8px;"/><figcaption style="font-size:12px;color:#888;margin-top:4px;">이미지: AI 생성(Google Flow)</figcaption></figure>
+<h2>2. 네트워크 초기화 및 명령어 실행</h2>
+<p>IP 주소가 꼬였거나 시스템 파일에 오류가 생겼다면 윈도우 내장 명령어를 통해 네트워크 설정을 공장 초기화 상태로 되돌릴 수 있습니다. 이 작업은 인터넷 설정과 관련된 캐시를 깨끗하게 비워줍니다.</p>
+<ul>
+  <li><strong>소요 시간:</strong> 3분</li>
+  <li><strong>절차:</strong><br>
+    1. 작업표시줄 검색창에 'cmd'를 입력합니다.<br>
+    2. 검색된 '명령 프롬프트'를 마우스 우클릭하여 '관리자 권한으로 실행'을 선택합니다.<br>
+    3. 검은색 창이 뜨면 <code>netsh winsock reset</code>을 입력하고 엔터를 칩니다.<br>
+    4. 이어서 <code>netsh int ip reset</code>을 입력하고 엔터를 칩니다.<br>
+    5. 마지막으로 <code>ipconfig /flushdns</code>를 입력해 DNS 캐시를 비운 뒤 컴퓨터를 재부팅합니다.
+  </li>
+</ul>
+
+<h2>3. 무선 랜카드 드라이버 최신화 또는 재설치</h2>
+<p>윈도우 업데이트 이후 기존 랜카드 드라이버와 충돌이 일어나 와이파이가 안 잡히는 현상이 발생하기도 합니다. 제조사 홈페이지에서 최신 드라이버를 다운로드받거나 재설치해야 합니다.</p>
+<ul>
+  <li><strong>소요 시간:</strong> 5~10분</li>
+  <li><strong>절차:</strong><br>
+    1. 유선 랜선을 연결하거나 스마트폰 테더링(USB 케이블 연결)을 통해 임시로 인터넷에 접속합니다.<br>
+    2. 장치 관리자에서 무선 랜카드를 우클릭한 뒤 '드라이버 업데이트'를 선택하여 자동으로 검색합니다.<br>
+    3. 만약 개선되지 않는다면 '디바이스 제거'를 누른 후 PC를 재부팅합니다. 재부팅 시 윈도우가 자동으로 기본 드라이버를 재설치합니다.
+  </li>
+</ul>
+
+<h2>주의할 점 및 공유기 점검</h2>
+<p>PC 자체의 설정에는 문제가 없는데 공유기 오류로 인해 신호를 송출하지 못하는 경우도 많습니다. 집 안의 다른 스마트폰이나 태블릿에서도 와이파이가 잡히지 않는다면 공유기 문제일 확률이 높습니다. 이럴 때는 공유기의 전원 플러그를 뽑고 30초 정도 기다렸다가 다시 꽂아 재부팅해 보세요. 무선랜카드 안테나(외장형)가 느슨하게 체결되어 있는지도 물리적으로 확인하는 것이 좋습니다.</p>
+
+<h3>자주 묻는 질문</h3>
+<p><strong>Q1. 장치 관리자에 와이파이 장치 자체가 아예 안 보여요. 어떻게 해야 하나요?</strong><br>A1. 무선 랜카드 하드웨어가 완전히 인식되지 않거나 물리적으로 고장 났을 가능성이 큽니다. 노트북의 경우 비행기 모드 단축키가 잘못 눌렸는지 확인하시고, 데스크탑은 본체를 열어 랜카드 슬롯이 잘 꽂혀 있는지 확인하거나 외장형 무선 USB 랜카드를 새로 장착하는 것을 고려해 봐야 합니다.</p>
+<p><strong>Q2. 랜선 연결은 정상인데 와이파이만 안 잡혀요.</strong><br>A2. 유선 인터넷과 무선 랜카드는 시스템 내부에서 별개의 장치로 작동합니다. 유선이 된다면 인터넷 회선 자체는 정상인이, 위 본문에서 다룬 '네트워크 어댑터 재설정'이나 '무선 랜카드 드라이버 문제'일 확률이 매우 높습니다.</p>
+<p><strong>Q3. 공유기 재부팅은 어떻게 하나요?</strong><br>A3. 공유기에 연결된 검은색 전원 어댑터 선을 뽑은 후 모든 불이 꺼진 것을 확인하고 30초 뒤에 다시 꽂아주시면 됩니다. 공유기 뒷면에 있는 작은 'RESET' 구멍을 바늘로 10초 이상 누르면 공장 초기화가 되므로 주의가 필요합니다.</p>
+
+<p>PC에서 와이파이가 잡히지 않을 때는 당황하지 말고 네트워크 어댑터 재부팅, 명령어를 통한 IP 초기화, 그리고 드라이버 점검 순서로 차근차근 확인해 보는 것이 가장 빠른 해결책입니다. 대부분의 소프트웨어적 오류는 이 과정에서 말끔히 해결됩니다.</p>
+
+<p><em>※ 본 기사는 일반적인 정보 제공을 목적으로 하며, 개별 상황에 따라 결과가 다를 수 있습니다. 구체적인 판단이 필요한 경우 관련 전문가 또는 공식 기관에 문의하시기 바랍니다.</em></p>
+<script type="application/ld+json" data-kn-faq="1">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "장치 관리자에 와이파이 장치 자체가 아예 안 보여요. 어떻게 해야 하나요?", "acceptedAnswer": {"@type": "Answer", "text": "무선 랜카드 하드웨어가 완전히 인식되지 않거나 물리적으로 고장 났을 가능성이 큽니다. 노트북의 경우 비행기 모드 단축키가 잘못 눌렸는지 확인하시고, 데스크탑은 본체를 열어 랜카드 슬롯이 잘 꽂혀 있는지 확인하거나 외장형 무선 USB 랜카드를 새로 장착하는 것을 고려해 봐야 합니다."}}, {"@type": "Question", "name": "랜선 연결은 정상인데 와이파이만 안 잡혀요.", "acceptedAnswer": {"@type": "Answer", "text": "유선 인터넷과 무선 랜카드는 시스템 내부에서 별개의 장치로 작동합니다. 유선이 된다면 인터넷 회선 자체는 정상인이, 위 본문에서 다룬 '네트워크 어댑터 재설정'이나 '무선 랜카드 드라이버 문제'일 확률이 매우 높습니다."}}, {"@type": "Question", "name": "공유기 재부팅은 어떻게 하나요?", "acceptedAnswer": {"@type": "Answer", "text": "공유기에 연결된 검은색 전원 어댑터 선을 뽑은 후 모든 불이 꺼진 것을 확인하고 30초 뒤에 다시 꽂아주시면 됩니다. 공유기 뒷면에 있는 작은 'RESET' 구멍을 바늘로 10초 이상 누르면 공장 초기화가 되므로 주의가 필요합니다."}}]}</script>
+<div class="kn-related" style="margin-top:24px;padding-top:16px;border-top:1px solid #ddd;"><strong>함께 보면 좋은 글</strong><ul><li><a href="https://rahanews-kr.blogspot.com/2026/11/blog-post.html">카카오톡 백업 및 복원 방법, 대화내용 안 날리는 완벽 가이드</a></li><li><a href="https://rahanews-kr.blogspot.com/2026/10/4_01351936990.html">아이폰 사진 용량 줄이는 법 4가지 설정 꿀팁</a></li><li><a href="https://rahanews-kr.blogspot.com/2026/10/5_0780167025.html">크롬 브라우저 느려질 때 간단하게 해결하는 방법 5가지</a></li></ul></div><div class="rn-sources"><h3>참고할 공식 사이트</h3><p>제도·요금·절차는 수시로 바뀔 수 있으므로, 실제로 신청하거나 결정하기 전에 아래 공식 사이트에서 최신 내용을 확인하세요.</p><ul><li><a href="https://support.microsoft.com/ko-kr" target="_blank" rel="noopener noreferrer">Microsoft 지원</a></li></ul></div>

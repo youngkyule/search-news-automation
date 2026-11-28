@@ -1,0 +1,1 @@
+Existing post: ipconfig /release and /renew are not mentioned (added in enrich). Windows menu names differ between 10/11. Source: https://support.microsoft.com/en-us/windows/fix-wi-fi-connection-issues-in-windows-9424a1f7-6a3b-65a6-4d78-7f07eee84d2c

@@ -1,0 +1,1 @@
+Post 01: gov.kr FAQ (gov.kr/portal/faq/986) says 확정일자 cannot be applied online; must visit 주민센터. Existing FAQ Q3 claims a checkbox on 정부24 applies 확정일자 together - appears wrong. Also: 온라인 신청인 만19세 이상, 세대원 전입은 세대주 확인 필요(본문은 '미성년자 혼자'로 흐리게 표현). Typo '우거지 전입신고' (should be 전입). 'Mydx' menu name not verified (gov.kr says 나의민원).

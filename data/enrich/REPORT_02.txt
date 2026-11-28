@@ -1,0 +1,1 @@
+Post 02: HRD-Net references - 고용24 (work24.go.kr) guide now handles card issuance/course search. 졸업예정자 wording: 고용24 excludes 대학(원)생 with 2+ years until graduation. Typo '월 대 임금'. 카드 발급 1~2주 not verified. Source: m.work24.go.kr/hr/h/a/1100/selectIssuGudn.do

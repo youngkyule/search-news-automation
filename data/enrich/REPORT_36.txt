@@ -1,0 +1,4 @@
+36: Existing post says "등기신청수수료를 전자소송에서 납부" and gives no cost total; total ~43,400 won example is in 생활법령(easylaw.go.kr) per search summary (not fully opened). Post Q3 implies interest benefit; harmless. No clear error.
+37: No official source found for deodorizing claims. Post's "10원 동전 구리 살균" is unverified folk claim (and current 10 won coins are mostly aluminum/copper-plated; "구형" qualifier present). Consider softening.
+38: Post says "사진 첨부하는 것이 좋습니다" - 고용노동부 says photo not required/prohibited per context; suggest "선택". Also typo "비용 20채 절감" (should be 20%).
+39: Post says "통행료의 10배 부가통행료" for ignoring notices and "과태료" - imprecise: 부가통행료 only after final 독촉장 expiry / 20+ misses / fraud; law caps at 10x evaded amount. Source: https://www.hipass.co.kr/LmsIndex_m.do (terms), https://www.ex.co.kr. Post Q1 "1~2일 반영" matches 'next-day' search. "고속도로 통행료 앱" name vs 'plus' unconfirmed.

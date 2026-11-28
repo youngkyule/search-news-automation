@@ -1,0 +1,2 @@
+1) Existing post says '설정 > 사진 > MAC 또는 PC로 전송 > 자동'. Apple's current page (iOS 18+) places the Keep Originals option under 설정 > 앱 > 사진; older iOS uses 설정 > 사진. Version note may be needed. Source: https://support.apple.com/en-us/116944
+2) Existing post claims 최적화 secures 'up to 80%' of capacity: no official source; Apple gives no such figure. Consider removing. Source for optimize behavior: https://support.apple.com/en-us/108782

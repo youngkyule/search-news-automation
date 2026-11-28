@@ -1,0 +1,1 @@
+Post describes 5과목/100분 and 한국사 as exam subject: changes from 2027 (한국사 -> 한능검 3급 이상, 문항 20->25 reported) per mpm.go.kr press release 2025-03-13 (cntId=4030); post lacks date caveat.

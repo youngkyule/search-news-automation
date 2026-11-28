@@ -1,0 +1,3 @@
+Post 07: body says same 입항일 + same sender => 합산과세. Per 관세청 2022-11 고시 개정 reports (KITA/fnnews/tf.co.kr), the 동일 입항일 기준 was deleted; FAQ Q2 (family names/입항일) and tip 1 are outdated. Source: https://www.kita.net/board/totalTradeNews/totalTradeNewsDetail.do?no=71611
+Post 07: Q1 says 국제 배송비 not in 과세가격; per 관세청 예상세액 page, 총과세가격 = 물품가격 + 운임 + 보험료 (only 면세 판정 excludes separable 국제운송비). https://www.customs.go.kr/kcs/ad/tax/BuyTaxCalculation.do?mi=2853
+Post 07: "건강기능식품 등 6병" wording is unverified/confusing; 관세청 says 목록통관 배제 품목 are 150달러 regardless of country.

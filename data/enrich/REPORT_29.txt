@@ -1,0 +1,1 @@
+Existing post: no outright errors found. It does not mention safe mode or system restore (added). Microsoft says 'free 10-15% of disk' and menu names differ between Win10/11. Sources: https://support.microsoft.com/en-us/windows/troubleshoot-blue-screen-errors-5c62726c-6489-52da-a372-3f73142c14ad ; https://support.Microsoft.com/kb/130536

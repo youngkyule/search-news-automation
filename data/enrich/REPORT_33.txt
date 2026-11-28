@@ -1,0 +1,1 @@
+(1) 본문의 TPMS 적정압 '보통 30~35 psi' 일반화: 제조사는 도어 라벨의 차량별 값 확인을 안내. (2) FAQ의 TPMS 초기화 '버튼 3초/시속 40km 10분'은 공식 확인 못함, 차종별 상이. 출처: https://ownersmanual.hyundai.com/full_webhelp/NX4/2025/ko_KR/warning_indicator_lights.html
